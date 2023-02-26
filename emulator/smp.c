@@ -197,6 +197,9 @@ static void smp_send(struct smp_conn *conn, uint8_t smp_cmd, const void *data,
 
 	iov[1].iov_base = (void *) data;
 	iov[1].iov_len = len;
+	if(&smp_cmd == BT_L2CAP_SMP_PAIRING_CONFIRM){
+		iov[1].iov_len = len + 1;
+	}
 
 	if (conn->addr_type == BDADDR_BREDR)
 		cid = SMP_BREDR_CID;
